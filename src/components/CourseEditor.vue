@@ -1,10 +1,21 @@
 <script setup>
 import { watch } from 'vue'
-import { draft } from '../state.js'
+import { draft, put, del } from '../state.js'
 import { Calendar, DatePicker } from 'v-calendar'
 import 'v-calendar/dist/style.css'
 const props = defineProps(['modelValue'])
 const emits = defineEmits(['update:modelValue'])
+
+async function submit () {
+  if (draft.new) {
+    const doc = { ...draft }
+    delete doc.new
+    await put(Math.random().toString(36).substr(2, 10), doc)
+    return emits('update:modelValue', false)
+  }
+  await put(draft._id, { ...draft })
+  emits('update:modelValue', false)
+}
 
 </script>
 
@@ -59,8 +70,8 @@ const emits = defineEmits(['update:modelValue'])
           <input v-model="draft.duration" type=number class="all-transition border rounded m-2 px-2 focus:border-blue-500 w-12">
         </div>
         <div class="flex items-center justify-center">
-          <button class="all-transition px-2 text-blue-500 font-bold rounded m-1 border border-blue-500 hover:text-white hover:bg-blue-500">submit</button>
-          <button class="all-transition px-2 text-red-500 font-bold rounded m-1 border border-red-500 hover:text-white hover:bg-red-500" v-if="!draft.new">delete</button>
+          <button class="all-transition px-2 text-blue-500 font-bold rounded m-1 border border-blue-500 hover:text-white hover:bg-blue-500" @click="submit">submit</button>
+          <button class="all-transition px-2 text-red-500 font-bold rounded m-1 border border-red-500 hover:text-white hover:bg-red-500" v-if="!draft.new" @click="del(draft._id); emits('update:modelValue', false)">delete</button>
           <button class="all-transition px-2 text-yellow-500 font-bold rounded m-1 border border-yellow-500 hover:text-white hover:bg-yellow-500" @click="emits('update:modelValue', false)">cancel</button>
         </div>
       </div>

@@ -1,23 +1,12 @@
 <script setup>
+import { watch } from 'vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import CourseEditor from '../components/CourseEditor.vue'
-import { draft } from '../state.js'
+import { draft, get } from '../state.js'
 import moment from 'moment'
 
 let courses = $ref({})
 let show = $ref(false)
-
-const get = async () => ({
-  testid: {
-    name: 'Sample',
-    code: 'SP000',
-    lang: 'English',
-    teacher: 'Jingyuan Zhang',
-    date: 1665497437398,
-    location: 'Research Building Lecture Hall',
-    duration: 3
-  }
-})
 
 async function init () {
   courses = await get()
@@ -34,6 +23,10 @@ function updateDraft (o) {
   draft.new = false
   for (const k in o) draft[k] = o[k]
 }
+
+watch($$(show), () => {
+  init()
+})
 
 </script>
 
