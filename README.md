@@ -1,20 +1,10 @@
-# template-web
+# jyCoursework
 
-Vite + Vue 3 + VueRouter 4 + TailwindCSS + Heroicons
+Vite + Vue 3 + VueRouter 4 + TailwindCSS + Heroicons + MomentJs + VCalander
 
-CDN Library: axios + SweetAlert2 + NProgress + Momentjs
+CDN Library: axios + SweetAlert2 + NProgress
 
 ## Get Started
-
-Click **Use Template** or this [link](https://github.com/yzITI/template-web/generate).
-
-Change project name in  `package.json` and `index.html`
-```
-"name": "project-name"
-
-<!-- you may change lang as well -->
-<title>Your Title</title>
-```
 
 Install dependency
 
