@@ -70,7 +70,7 @@ async function delCourse () {
         </div>
         <div class="flex items-center">
           <div class="text-gray-500">Date&Time</div>
-          <DatePicker class="ml-2" v-model="draft.date" mode="dateTime" is24hr :model-config="{ type: 'number' }">
+          <DatePicker class="ml-2 font-mono" v-model="draft.date" mode="dateTime" is24hr :model-config="{ type: 'number' }">
             <template v-slot="{ inputValue, inputEvents }">
               <input
                 class="px-2 py-1 border rounded focus:outline-none focus:border-blue-300"
