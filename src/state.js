@@ -42,6 +42,12 @@ export const put = async (id, data) => {
   if (!data.location) return { ok: false, err: 'Missing location!' }
   if (!data.duration) return { ok: false, err: 'Duration not set!' }
   if (data.duration <= 0) return { ok: false, err: 'Invalid duration!' }
+  for (const k in db) {
+    if (id == k) continue
+    const x = data.date, y = x + data.duration * 3600e3
+    const a = db[k].date, b = a + db[k].duration * 3600e3
+    if (y >= a && b >= x) return { ok: false, err: 'This room is already occupied!' }
+  }
   db[id] = data
   db[id]._id = id
   return { ok: true }
