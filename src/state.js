@@ -30,6 +30,7 @@ export const put = async (id, data) => {
   if (!data.lang) return { ok: false, err: 'Language not selected!' }
   if (!data.teacher) return { ok: false, err: 'Missing teacher!' }
   if (!data.date) return { ok: false, err: 'Date not set!' }
+  if (data.date < Date.now()) return { ok: false, err: 'Time travel forbidden!' }
   const d = moment(data.date).format('YYYY/MM/DD')
   for (const k in db) {
     if (id == k) continue

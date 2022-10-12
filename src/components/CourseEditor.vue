@@ -85,7 +85,8 @@ async function delCourse () {
           <select v-model="draft.location" class="m-2 text-center border rounded hover:border-blue-500 all-transition">
             <option value="Teaching Building No.1 Lecture Hall" selected>Teaching Building No.1 Lecture Hall</option>
             <option value="Research Building Lecture Hall">Research Building Lecture Hall</option>
-            <option value="Library Conference Hall and Activity Room">Library Conference Hall and Activity Room</option>
+            <option value="Library Conference Hall">Library Conference Hall</option>
+            <option value="Activity Room">Activity Room</option>
           </select>
         </div>
         <div class="flex items-center">
