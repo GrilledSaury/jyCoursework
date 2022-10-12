@@ -39,6 +39,7 @@ export const put = async (id, data) => {
   }
   if (!data.location) return { ok: false, err: 'Missing location!' }
   if (!data.duration) return { ok: false, err: 'Duration not set!' }
+  if (data.duration <= 0) return { ok: false, err: 'Invalid duration!' }
   db[id] = data
   db[id]._id = id
   return { ok: true }
