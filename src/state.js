@@ -29,7 +29,7 @@ export const put = async (id, data) => {
   }
   if (!data.lang) return { ok: false, err: 'Language not selected!' }
   if (!data.teacher) return { ok: false, err: 'Missing teacher!' }
-  if (data.teacher.match(/[^a-zA-Z]/)) return { ok: false, err: 'Teacher Name: English letters only!' }
+  if (data.teacher.match(/[^a-zA-Z\s\S]/)) return { ok: false, err: 'Teacher Name: English letters only!' }
   if (!data.date) return { ok: false, err: 'Date not set!' }
   const d = moment(data.date).format('YYYY/MM/DD')
   if (data.date < Date.now() || d == moment(Date.now()).format('YYYY/MM/DD')) return { ok: false, err: 'Time travel forbidden!' }
