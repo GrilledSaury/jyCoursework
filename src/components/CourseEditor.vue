@@ -10,11 +10,35 @@ async function submit () {
   if (draft.new) {
     const doc = { ...draft }
     delete doc.new
-    await put(Math.random().toString(36).substr(2, 10), doc)
-    return emits('update:modelValue', false)
+    const res = await put(Math.random().toString(36).substr(2, 10), doc)
+    if (res.ok) return emits('update:modelValue', false)
+    return await Swal.fire('Error', res.err, 'error')
   }
-  await put(draft._id, { ...draft })
-  emits('update:modelValue', false)
+  const res = await put(draft._id, { ...draft })
+  if (res.ok) return emits('update:modelValue', false)
+  await Swal.fire('Error', res.err, 'error')
+}
+
+async function delCourse () {
+  await Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      await del(draft._id)
+      Swal.fire(
+        'Deleted!',
+        'The course has been deleted.',
+        'success'
+      )
+      emits('update:modelValue', false)
+    }
+  })
 }
 
 </script>
@@ -71,7 +95,7 @@ async function submit () {
         </div>
         <div class="flex items-center justify-center">
           <button class="all-transition px-2 text-blue-500 font-bold rounded m-1 border border-blue-500 hover:text-white hover:bg-blue-500" @click="submit">submit</button>
-          <button class="all-transition px-2 text-red-500 font-bold rounded m-1 border border-red-500 hover:text-white hover:bg-red-500" v-if="!draft.new" @click="del(draft._id); emits('update:modelValue', false)">delete</button>
+          <button class="all-transition px-2 text-red-500 font-bold rounded m-1 border border-red-500 hover:text-white hover:bg-red-500" v-if="!draft.new" @click="delCourse">delete</button>
           <button class="all-transition px-2 text-yellow-500 font-bold rounded m-1 border border-yellow-500 hover:text-white hover:bg-yellow-500" @click="emits('update:modelValue', false)">cancel</button>
         </div>
       </div>

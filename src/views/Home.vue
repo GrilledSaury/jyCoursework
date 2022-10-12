@@ -61,7 +61,7 @@ watch($$(show), () => {
         </tbody>
       </table>
       <div class="flex items-center justify-center m-2">
-        <button class="flex items-center all-transition bg-green-500 font-bold text-white rounded-full shadow hover:shadow-md mx-3 my-1 px-2 py-1 w-32" @click="updateDraft({ new: true }); show = true">
+        <button class="flex items-center all-transition bg-green-500 font-bold text-white rounded-full shadow hover:shadow-md mx-3 my-1 px-2 py-1 w-32" @click="if (!draft.new) updateDraft({ new: true }); show = true">
           <PlusIcon class="w-5 m-1" />
           Add Class
         </button>

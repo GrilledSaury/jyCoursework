@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import moment from 'moment'
 
 const db = {
   testid: {
@@ -18,8 +19,29 @@ export const draft = reactive({ new: true })
 export const get = async () => ({ ...db })
 
 export const put = async (id, data) => {
+  if (!data.name) return { ok: false, err: 'Missing course name!' }
+  if (data.name.match(/[^a-zA-Z]/)) return { ok: false, err: 'Course Name: English letters only!' }
+  if (!data.code) return { ok: false, err: 'Missing course code!' }
+  for (const k in db) {
+    if (id == k) continue
+    if (data.code == db[k].code && data.name != db[k].name) return { ok: false, err: 'Course code already taken!' }
+  }
+  if (!data.lang) return { ok: false, err: 'Language not selected!' }
+  if (!data.teacher) return { ok: false, err: 'Missing teacher!' }
+  if (!data.date) return { ok: false, err: 'Date not set!' }
+  const d = moment(data.date).format('YYYY/MM/DD')
+  for (const k in db) {
+    if (id == k) continue
+    if (d == moment(db[k].date).format('YYYY/MM/DD')) {
+      if (data.teacher == db[k].teacher) return { ok: false, err: 'This teacher already has a course on that day!' }
+      if (data.name == db[k].name) return { ok: false, err: 'There is already a same course on that day!' }
+    }
+  }
+  if (!data.location) return { ok: false, err: 'Missing location!' }
+  if (!data.duration) return { ok: false, err: 'Duration not set!' }
   db[id] = data
   db[id]._id = id
+  return { ok: true }
 }
 
 export const del = async (id) => {
