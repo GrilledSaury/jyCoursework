@@ -46,7 +46,7 @@ async function delCourse () {
 <template>
   <Transition name="fade">
     <div class="fixed top-0 left-0 w-screen h-screen bg-black flex items-center justify-center" v-if="props.modelValue" style="background-color: rgba(0, 0, 0, 0.5);" @click="emits('update:modelValue', false)">
-      <div class="fixed relative px-10 py-8 bg-white rounded flex flex-col justify-center items-center" @click.stop="">
+      <div class="fixed relative px-4 py-2 sm:px-10 sm:py-8 bg-white rounded flex flex-col justify-center sm:items-center" @click.stop="">
         <div class="flex items-center">
           <div class="text-gray-500">Course Name</div>
           <input v-model="draft.name" class="all-transition border rounded m-2 px-2 focus:border-blue-500">
@@ -77,20 +77,24 @@ async function delCourse () {
             <option value="Activity Room">Activity Room</option>
           </select>
         </div>
-        <div class="flex items-center">
-          <div class="text-gray-500">Date&Time</div>
-          <DatePicker class="m-2 font-mono" v-model="draft.date" mode="dateTime" is24hr :model-config="{ type: 'number' }">
-            <template v-slot="{ inputValue, inputEvents }">
-              <input
-                class="px-2 py-1 border rounded focus:outline-none focus:border-blue-300"
-                :value="inputValue"
-                v-on="inputEvents"
-              />
-            </template>
-          </DatePicker>
-          <div class="text-gray-500">Duration</div>
-          <div class="font-mono">/hour(s)</div>
-          <input v-model="draft.duration" type=number class="all-transition border rounded m-2 px-2 focus:border-blue-500 w-12">
+        <div class="sm:flex">
+          <div class="flex items-center">
+            <div class="text-gray-500">Date&Time</div>
+            <DatePicker class="m-2 font-mono" v-model="draft.date" mode="dateTime" is24hr :model-config="{ type: 'number' }">
+              <template v-slot="{ inputValue, inputEvents }">
+                <input
+                  class="px-2 py-1 border rounded focus:outline-none focus:border-blue-300"
+                  :value="inputValue"
+                  v-on="inputEvents"
+                />
+              </template>
+            </DatePicker>
+          </div>
+          <div class="flex items-center">
+            <div class="text-gray-500">Duration</div>
+            <input v-model="draft.duration" type=number class="all-transition border rounded m-2 px-2 focus:border-blue-500 w-12">
+            <div class="font-mono">hour(s)</div>
+          </div>
         </div>
         <div class="flex items-center justify-center">
           <button class="all-transition px-2 text-blue-500 font-bold rounded m-1 border border-blue-500 hover:text-white hover:bg-blue-500" @click="submit">submit</button>

@@ -31,10 +31,10 @@ watch($$(show), () => {
 </script>
 
 <template>
-  <div class="px-10 py-8 bg-gray-100 min-h-screen flex flex-col items-center">
-    <div class="text-4xl font-bold m-8">Open Courses</div>
-    <div class="bg-white rounded-md p-6">
-      <div class="overflow-scroll m-4" style="max-width: 80vw; max-height: 80vh;">
+  <div class="px-4 py-2 sm:px-10 sm:py-8 bg-gray-100 min-h-screen sm:flex sm:flex-col sm:items-center">
+    <div class="text-4xl font-bold m-4 sm:m-8">Open Courses</div>
+    <div class="bg-white rounded-md p-2 sm:p-6">
+      <div class="overflow-scroll m-1 sm:m-2" style="max-width: 90vw; max-height: 80vh;">
         <table class="text-center">
           <thead class="text-gray-600 border-b">
             <tr>
@@ -62,7 +62,7 @@ watch($$(show), () => {
           </tbody>
         </table>
       </div>
-      <div class="flex items-center justify-center m-2">
+      <div class="flex items-center justify-center m-1 sm:m-2">
         <button class="flex items-center all-transition bg-green-500 font-bold text-white rounded-full shadow hover:shadow-md mx-3 my-1 px-2 py-1 w-32" @click="if (!draft.new) updateDraft({ new: true }); show = true">
           <PlusIcon class="w-5 m-1" />
           Add Class
