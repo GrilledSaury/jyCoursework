@@ -69,18 +69,6 @@ async function delCourse () {
           <input v-model="draft.teacher" class="all-transition border rounded m-2 px-2 focus:border-blue-500">
         </div>
         <div class="flex items-center">
-          <div class="text-gray-500">Date&Time</div>
-          <DatePicker class="ml-2 font-mono" v-model="draft.date" mode="dateTime" is24hr :model-config="{ type: 'number' }">
-            <template v-slot="{ inputValue, inputEvents }">
-              <input
-                class="px-2 py-1 border rounded focus:outline-none focus:border-blue-300"
-                :value="inputValue"
-                v-on="inputEvents"
-              />
-            </template>
-          </DatePicker>
-        </div>
-        <div class="flex items-center">
           <div class="text-gray-500">Location</div>
           <select v-model="draft.location" class="m-2 text-center border rounded hover:border-blue-500 all-transition">
             <option value="Teaching Building No.1 Lecture Hall" selected>Teaching Building No.1 Lecture Hall</option>
@@ -90,6 +78,16 @@ async function delCourse () {
           </select>
         </div>
         <div class="flex items-center">
+          <div class="text-gray-500">Date&Time</div>
+          <DatePicker class="m-2 font-mono" v-model="draft.date" mode="dateTime" is24hr :model-config="{ type: 'number' }">
+            <template v-slot="{ inputValue, inputEvents }">
+              <input
+                class="px-2 py-1 border rounded focus:outline-none focus:border-blue-300"
+                :value="inputValue"
+                v-on="inputEvents"
+              />
+            </template>
+          </DatePicker>
           <div class="text-gray-500">Duration</div>
           <div class="font-mono">/hour(s)</div>
           <input v-model="draft.duration" type=number class="all-transition border rounded m-2 px-2 focus:border-blue-500 w-12">

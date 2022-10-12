@@ -33,7 +33,7 @@ watch($$(show), () => {
 <template>
   <div class="px-10 py-8 bg-gray-100 min-h-screen flex flex-col items-center">
     <div class="text-4xl font-bold m-8">Open Courses</div>
-    <div class="bg-white rounded-md p-4">
+    <div class="bg-white rounded-md p-4 overflow-x-scroll">
       <table class="table-auto text-center">
         <thead class="text-gray-600 border-b">
           <tr>
