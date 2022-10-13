@@ -22,7 +22,7 @@ export const put = async (id, data) => {
   if (!data.name) return { ok: false, err: 'Missing course name!' }
   if (data.name.match(/[^a-zA-Z]/)) return { ok: false, err: 'Course Name: English letters only!' }
   if (!data.code) return { ok: false, err: 'Missing course code!' }
-  if (data.code.match(/[^a-zA-Z0-9]/)) return { ok: false, err: 'Course Code: English letters and numbers only!' }
+  if (!data.code.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/)) return { ok: false, err: 'Course Code: Combination of English letters and numbers only!' }
   for (const k in db) {
     if (id == k) continue
     if (data.code == db[k].code && data.name != db[k].name) return { ok: false, err: 'Course code already taken!' }
